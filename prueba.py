@@ -3,4 +3,4 @@ def sumatoria(x,y):
 
 resultado = sumatoria(5,2)
 if resultado == 7:
-    print('Fpyuncionó')
+    print('Funcionó')

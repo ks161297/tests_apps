@@ -1,4 +1,4 @@
-from werkzeug.datastructures import ContentRange
+
 from app import app
 from unittest import TestCase
 
@@ -21,3 +21,13 @@ class TestActividadesController(TestCase):
                 "actividadNombre":"Ir a cumpleaños"
             }]))
         self.assertEqual(respuesta.status_code, 201)
+
+    def test_fail_post_actividades(self):
+        respuesta = self.app.post('/actividades')
+        self.assertEqual(respuesta.status_code, 400)
+        self.assertDictEqual(respuesta.json, dict(message={'actividadNombre': 'Falta el nombre de la actividad'}))
+
+    def test_post_actividades(self):
+        respuesta = self.app.post('/actividades', json={'actividadNombre':'Hacer la tarea de backend'})
+        self.assertEqual(respuesta.status_code, 201)
+        self.assertIsNotNone(respuesta.json)
